@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Mission06_rcroft1.Models
 {
+    // creating the fields in the database
     public class MovieData
     {
         [Key][Required]

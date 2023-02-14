@@ -30,6 +30,8 @@ namespace Mission06_rcroft1.Controllers
             return View();
         }
 
+        // overloading newMovie with a get and a post
+
         [HttpGet]
         public IActionResult NewMovie()
         {
@@ -42,6 +44,8 @@ namespace Mission06_rcroft1.Controllers
             {
                 newContext.Add(md);
                 newContext.SaveChanges();
+
+                // returns the confirmation page
 
                 return View("Confirmation");
             }

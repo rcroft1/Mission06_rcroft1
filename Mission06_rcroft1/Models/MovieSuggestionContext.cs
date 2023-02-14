@@ -14,6 +14,8 @@ namespace Mission06_rcroft1.Models
         }
         public DbSet<MovieData> responses { get; set; }
         protected override void OnModelCreating(ModelBuilder mb)
+
+        //seeding the database
         {
             mb.Entity<MovieData>().HasData(
 

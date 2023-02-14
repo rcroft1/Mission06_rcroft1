@@ -7,6 +7,8 @@
 
 <h2>Enter a new movie!</h2>
 
+@*this is the form*@
+
 <form method="post">
     <label asp-for="title">Title</label>
     <input asp-for="title" /><br />
@@ -40,5 +42,8 @@
 
     <button type="submit">Submit Movie</button>
     <br />
+
+    @* the validation summary gives error message *@
+
     <div asp-validation-summary="All"></div>
 </form>
