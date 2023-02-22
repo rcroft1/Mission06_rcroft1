@@ -8,8 +8,8 @@ using Mission06_rcroft1.Models;
 namespace Mission06_rcroft1.Migrations
 {
     [DbContext(typeof(MovieSuggestionContext))]
-    [Migration("20230214033543_New")]
-    partial class New
+    [Migration("20230221205258_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -17,10 +17,69 @@ namespace Mission06_rcroft1.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.32");
 
+            modelBuilder.Entity("Mission06_rcroft1.Models.Categories", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Action / Adventure"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Comedy"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryName = "Drama"
+                        },
+                        new
+                        {
+                            CategoryId = 4,
+                            CategoryName = "Family"
+                        },
+                        new
+                        {
+                            CategoryId = 5,
+                            CategoryName = "Horror / Suspense"
+                        },
+                        new
+                        {
+                            CategoryId = 6,
+                            CategoryName = "Miscellaneous"
+                        },
+                        new
+                        {
+                            CategoryId = 7,
+                            CategoryName = "Television"
+                        },
+                        new
+                        {
+                            CategoryId = 8,
+                            CategoryName = "VHS"
+                        });
+                });
+
             modelBuilder.Entity("Mission06_rcroft1.Models.MovieData", b =>
                 {
                     b.Property<int>("MovieId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CategoryId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("director")
@@ -50,12 +109,15 @@ namespace Mission06_rcroft1.Migrations
 
                     b.HasKey("MovieId");
 
-                    b.ToTable("responses");
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Responses");
 
                     b.HasData(
                         new
                         {
                             MovieId = 1,
+                            CategoryId = 2,
                             director = "Joel Crawford",
                             edited = false,
                             rating = "Pg",
@@ -65,6 +127,7 @@ namespace Mission06_rcroft1.Migrations
                         new
                         {
                             MovieId = 2,
+                            CategoryId = 3,
                             director = "Andrew Adamson",
                             edited = false,
                             notes = "Best movie ever",
@@ -75,6 +138,7 @@ namespace Mission06_rcroft1.Migrations
                         new
                         {
                             MovieId = 3,
+                            CategoryId = 4,
                             director = "Conrad Vernon",
                             edited = false,
                             notes = "Second best movie ever",
@@ -82,6 +146,15 @@ namespace Mission06_rcroft1.Migrations
                             title = "Shreck 2",
                             year = 2004
                         });
+                });
+
+            modelBuilder.Entity("Mission06_rcroft1.Models.MovieData", b =>
+                {
+                    b.HasOne("Mission06_rcroft1.Models.Categories", "Categories")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -23,5 +23,8 @@ namespace Mission06_rcroft1.Models
         public string lentTo { get; set; }
         [MaxLength (25)]
         public string notes { get; set; }
+        public int CategoryId { get; set; }
+        //[Required(ErrorMessage = "Category is required")]
+        public Categories Category { get; set; }
     }
 }
